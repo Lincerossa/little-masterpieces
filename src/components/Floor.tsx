@@ -10,7 +10,7 @@ type FloorProps = {
 const Floor: FC<FloorProps> = ({ position }) => {
   return (
     <mesh position={position} rotation={[-Math.PI / 2, 0, 0]}>
-      <planeGeometry args={[50, 50]} />
+      <planeGeometry args={[500, 500]} />
       <MeshReflectorMaterial
         blur={[300, 100]}
         resolution={2048}

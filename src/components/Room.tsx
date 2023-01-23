@@ -6,12 +6,10 @@ import * as THREE from 'three'
 type RoomProps = {
   position: [number, number, number]
   dimension: [number, number, number]
+  image: string
 }
-const Room: FC<RoomProps> = ({ position, dimension }) => {
-  const texture = useLoader(
-    THREE.TextureLoader,
-    'https://images.unsplash.com/photo-1620136619922-f592abb9df44?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2148&q=80',
-  )
+const Room: FC<RoomProps> = ({ position, dimension, image }) => {
+  const texture = useLoader(THREE.TextureLoader, image)
 
   const frameWidth = 0.1
   const frameThickness = 0.05
@@ -20,7 +18,7 @@ const Room: FC<RoomProps> = ({ position, dimension }) => {
     <>
       <mesh position={position}>
         <boxGeometry args={[dimension[0], dimension[1], dimension[2]]} />
-        <meshPhysicalMaterial attach="material" color="red" />
+        <meshPhysicalMaterial attach="material" color="#ea580c" />
       </mesh>
       <mesh position={[position[0], position[1], (dimension[2] + frameThickness) / 2]}>
         <boxGeometry
