@@ -6,12 +6,10 @@ import * as THREE from 'three'
 type RoomProps = {
   position: [number, number, number]
   dimension: [number, number, number]
+  image: string
 }
-const Room: FC<RoomProps> = ({ position, dimension }) => {
-  const texture = useLoader(
-    THREE.TextureLoader,
-    'https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmFieSUyMHBhaW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
-  )
+const Room: FC<RoomProps> = ({ position, dimension, image }) => {
+  const texture = useLoader(THREE.TextureLoader, image)
 
   const frameWidth = 0.1
   const frameThickness = 0.05

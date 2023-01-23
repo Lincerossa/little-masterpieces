@@ -4,7 +4,7 @@ import { Canvas } from '@react-three/fiber'
 
 import Floor from '../components/Floor'
 import Room from '../components/Room'
-import { CEILING_HEIGHT, GROUND_FLOOR } from '../utils/consts'
+import { CEILING_HEIGHT, GROUND_FLOOR, IMAGES } from '../utils/consts'
 
 const Museum = () => (
   <div className="w-screen h-screen bg-indigo-900">
@@ -20,20 +20,20 @@ const Museum = () => (
         fade
         speed={1}
       />
-      <pointLight position={[0, CEILING_HEIGHT, -10]} color="#312e81" intensity={10} />
+      <pointLight position={[0, 50, -10]} color="#312e81" intensity={10} />
       <Floor position={[0, GROUND_FLOOR, 0]} />
-      <Room
-        position={[0, GROUND_FLOOR + CEILING_HEIGHT / 2, 0]}
-        dimension={[2, CEILING_HEIGHT, 0.2]}
-      />
-      <Room
-        position={[-3, GROUND_FLOOR + CEILING_HEIGHT / 2, 0]}
-        dimension={[2, CEILING_HEIGHT, 0.2]}
-      />
-      <Room
-        position={[3, GROUND_FLOOR + CEILING_HEIGHT / 2, 0]}
-        dimension={[2, CEILING_HEIGHT, 0.2]}
-      />
+      {IMAGES.map((image, index) => (
+        <Room
+          key={image}
+          position={[
+            index * 3 - (2 * IMAGES.length) / 2,
+            GROUND_FLOOR + CEILING_HEIGHT / 2,
+            0,
+          ]}
+          dimension={[2, CEILING_HEIGHT, 0.2]}
+          image={image}
+        />
+      ))}
     </Canvas>
   </div>
 )
