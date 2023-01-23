@@ -15,15 +15,15 @@ const Museum = () => (
       <Floor position={[0, GROUND_FLOOR, 0]} />
       <Room
         position={[0, GROUND_FLOOR + CEILING_HEIGHT / 2, 0]}
-        dimension={[3, CEILING_HEIGHT, 0.2]}
+        dimension={[2, CEILING_HEIGHT, 0.2]}
       />
       <Room
-        position={[-5, GROUND_FLOOR + CEILING_HEIGHT / 2, 0]}
-        dimension={[3, CEILING_HEIGHT, 0.2]}
+        position={[-3, GROUND_FLOOR + CEILING_HEIGHT / 2, 0]}
+        dimension={[2, CEILING_HEIGHT, 0.2]}
       />
       <Room
-        position={[5, GROUND_FLOOR + CEILING_HEIGHT / 2, 0]}
-        dimension={[3, CEILING_HEIGHT, 0.2]}
+        position={[3, GROUND_FLOOR + CEILING_HEIGHT / 2, 0]}
+        dimension={[2, CEILING_HEIGHT, 0.2]}
       />
     </Canvas>
   </div>
