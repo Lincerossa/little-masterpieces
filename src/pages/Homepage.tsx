@@ -6,7 +6,7 @@ const Homepage = () => (
       to="/museum"
       className="rounded-md p-4 bg-orange-600 shadow-md hover:shadow-lg transition-shadow"
     >
-      <strong className="uppercase text-white sm:text-xl sm:text-5xl tracking-wider">
+      <strong className="uppercase text-white sm:text-xl md:text-5xl tracking-wider">
         the museum
       </strong>
     </Link>
