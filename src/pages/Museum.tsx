@@ -4,14 +4,14 @@ import { Canvas } from '@react-three/fiber'
 import { useCallback, useMemo, useState } from 'react'
 
 import Floor from '../components/Floor'
-import Room from '../components/Room/Room'
-import { RoomProps } from '../components/Room/types'
+import Room from '../components/Room'
 import { CEILING_HEIGHT, GROUND_FLOOR, IMAGES } from '../utils/consts'
+import { MeshGeometryBaseProps } from '../utils/types'
 
 const Museum = () => {
   const [manualCamera, setManualCamera] = useState(true)
 
-  const images = useMemo<Array<RoomProps>>(() => {
+  const images = useMemo<Array<MeshGeometryBaseProps & { image: string }>>(() => {
     return IMAGES.map((image, index) => ({
       position: [
         index * 3 - (2 * IMAGES.length) / 2,

@@ -1,5 +1,4 @@
-export type RoomProps = {
+export type MeshGeometryBaseProps = {
   position: [number, number, number]
   dimension: [number, number, number]
-  image: string
 }

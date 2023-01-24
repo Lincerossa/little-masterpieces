@@ -3,12 +3,14 @@ import { useLoader } from '@react-three/fiber'
 import { FC, useMemo } from 'react'
 import * as THREE from 'three'
 
-import { RoomProps } from './types'
+import { MeshGeometryBaseProps } from '../utils/types'
+
+type RoomProps = MeshGeometryBaseProps & { image: string }
 
 const Room: FC<RoomProps> = ({ position, dimension, image }) => {
   const texture = useLoader(THREE.TextureLoader, image)
 
-  const frame = useMemo<Pick<RoomProps, 'dimension' | 'position'>>(() => {
+  const frame = useMemo<MeshGeometryBaseProps>(() => {
     const FRAME_WIDTH = 0.1
     const FRAMTE_THICKNESS = 0.05
     return {
