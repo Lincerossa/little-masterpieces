@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
-import { Stars } from '@react-three/drei'
+import { OrbitControls, Stars } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import { Suspense, useState } from 'react'
+import { Suspense, useCallback, useState } from 'react'
 
 import Camera from '../components/Camera'
 import Floor from '../components/Floor'
@@ -14,19 +14,34 @@ const Museum = () => {
   const [cameraPosition, setCameraPosition] = useState<
     MeshGeometryBaseProps['position'] | null
   >(null)
-
+  const [manualCamera, setManualCamera] = useState<boolean>(false)
   const images = useImages()
+
+  const handleSetCameraPosition = useCallback(
+    (position: MeshGeometryBaseProps['position'] | null) => {
+      setManualCamera(false)
+      setCameraPosition(position)
+    },
+    [],
+  )
 
   return (
     <div className="w-screen h-screen bg-indigo-900">
-      <Canvas camera={{ fov: 75, position: [0, 0, 4] }}>
+      <button
+        className="z-10 absolute top-1 right-1 rounded-md p-2 bg-orange-600 shadow-md hover:shadow-lg transition-shadow uppercase text-white"
+        onClick={() => setManualCamera((e) => !e)}
+      >
+        Manual camera {manualCamera ? 'on' : 'off'}
+      </button>
+      <Canvas camera={{ fov: 75, position: [0, 10, 30] }}>
         <Suspense fallback={null}>
           {cameraPosition && (
             <Camera
-              setCameraPosition={setCameraPosition}
+              setCameraPosition={handleSetCameraPosition}
               cameraPosition={cameraPosition}
             />
           )}
+          {manualCamera && <OrbitControls />}
           <ambientLight intensity={2} />
           <Stars
             radius={100}
@@ -43,7 +58,7 @@ const Museum = () => {
             <group
               key={image}
               onClick={() => {
-                setCameraPosition(position)
+                handleSetCameraPosition(position)
               }}
             >
               <Room position={position} dimension={dimension} image={image} />
