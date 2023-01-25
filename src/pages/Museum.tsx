@@ -27,7 +27,7 @@ const Museum = () => {
   )
 
   return (
-    <div className="w-screen h-screen bg-sky-900">
+    <div className="w-screen h-screen bg-indigo-900">
       <button
         className="z-10 absolute top-1 right-1 rounded-md p-2 bg-orange-600 shadow-md hover:shadow-lg transition-shadow uppercase text-white"
         onClick={() => setManualCamera((e) => !e)}
