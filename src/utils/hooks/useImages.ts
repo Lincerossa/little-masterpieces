@@ -9,7 +9,7 @@ const useImages: UseImages = () => {
   const images = useMemo<Array<MeshGeometryBaseProps & { image: string }>>(() => {
     return IMAGES.map((image, index) => ({
       position: [
-        index * 3 - (2 * IMAGES.length) / 2,
+        index * 2.5 - (2 * IMAGES.length) / 2,
         GROUND_FLOOR + CEILING_HEIGHT / 2,
         0,
       ],

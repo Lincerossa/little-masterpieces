@@ -22,6 +22,7 @@ const Camera: FC<CameraProps> = ({ setCameraPosition, cameraPosition }) => {
     camera.position.x = MathUtils.lerp(x, X, SPEED)
     camera.position.y = MathUtils.lerp(y, Y, SPEED)
     camera.position.z = MathUtils.lerp(z, Z + DISTANCE, SPEED)
+    camera.lookAt(X, Y, Z)
 
     if (
       Math.abs(x - X) < DEVIATION &&
