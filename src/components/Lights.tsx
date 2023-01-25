@@ -7,12 +7,12 @@ const Lights = () => {
     <>
       <ambientLight intensity={2} />
       <pointLight position={[0, 50, -10]} color="#312e81" intensity={10} />
-      {Array.from({ length: 5 }).map((e, i) => (
+      {Array.from({ length: 20 }).map((e, i) => (
         <pointLight
           key={i}
-          intensity={random(0, 2)}
-          color={i % 5 ? 'lightgrey' : 'lightblue'}
-          position={[random(-150, 150), random(-150, 150), random(-150, 150)]}
+          intensity={0.2}
+          color={i % 2 ? '#312e81' : '#ea580c'}
+          position={[random(-200, 200), random(10, 30), random(-50, -100)]}
         />
       ))}
     </>
