@@ -1,17 +1,42 @@
 /* eslint-disable react/no-unknown-property */
-import { OrbitControls, Stars } from '@react-three/drei'
-import { Canvas } from '@react-three/fiber'
-import { useCallback, useMemo, useState } from 'react'
+import { Stars } from '@react-three/drei'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { FC, useMemo, useState } from 'react'
+import { MathUtils } from 'three'
 
 import Floor from '../components/Floor'
-import Room from '../components/Room/Room'
-import { RoomProps } from '../components/Room/types'
+import Room from '../components/Room'
 import { CEILING_HEIGHT, GROUND_FLOOR, IMAGES } from '../utils/consts'
+import { MeshGeometryBaseProps } from '../utils/types'
+
+type CameraProps = {
+  cameraPosition: MeshGeometryBaseProps['position']
+  setCameraPosition: (e: null) => void
+}
+const Camera: FC<CameraProps> = ({ setCameraPosition, cameraPosition }) => {
+  const [x, y, z] = cameraPosition
+  useFrame(({ camera }) => {
+    camera.position.x = MathUtils.lerp(camera.position.x, x, 0.05)
+    camera.position.y = MathUtils.lerp(camera.position.y, y, 0.05)
+    camera.position.z = MathUtils.lerp(camera.position.z, z + 2, 0.05)
+
+    if (
+      Math.abs(camera.position.x - x) < 0.2 &&
+      Math.abs(camera.position.y - y) < 0.2 &&
+      Math.abs(camera.position.z - z) < 2.2
+    ) {
+      setCameraPosition(null)
+    }
+  })
+  return null
+}
 
 const Museum = () => {
-  const [manualCamera, setManualCamera] = useState(true)
+  const [cameraPosition, setCameraPosition] = useState<
+    MeshGeometryBaseProps['position'] | null
+  >(null)
 
-  const images = useMemo<Array<RoomProps>>(() => {
+  const images = useMemo<Array<MeshGeometryBaseProps & { image: string }>>(() => {
     return IMAGES.map((image, index) => ({
       position: [
         index * 3 - (2 * IMAGES.length) / 2,
@@ -23,20 +48,12 @@ const Museum = () => {
     }))
   }, [])
 
-  const handleToggleCamera = useCallback(() => {
-    setManualCamera((e) => !e)
-  }, [setManualCamera])
-
   return (
     <div className="w-screen h-screen bg-indigo-900">
-      <button
-        className="z-10 absolute bottom-1 left-1 rounded-md p-2 bg-orange-600 shadow-md hover:shadow-lg transition-shadow uppercase text-white"
-        onClick={handleToggleCamera}
-      >
-        Manual camera {manualCamera ? 'on' : 'off'}
-      </button>
-      <Canvas>
-        {manualCamera && <OrbitControls />}
+      <Canvas camera={{ fov: 75, position: [0, 0, 4] }}>
+        {cameraPosition && (
+          <Camera setCameraPosition={setCameraPosition} cameraPosition={cameraPosition} />
+        )}
         <ambientLight intensity={2} />
         <Stars
           radius={100}
@@ -50,7 +67,9 @@ const Museum = () => {
         <pointLight position={[0, 50, -10]} color="#312e81" intensity={10} />
         <Floor position={[0, GROUND_FLOOR, 0]} />
         {images.map(({ image, position, dimension }) => (
-          <Room key={image} position={position} dimension={dimension} image={image} />
+          <group key={image} onClick={() => setCameraPosition(position)}>
+            <Room position={position} dimension={dimension} image={image} />
+          </group>
         ))}
       </Canvas>
     </div>
