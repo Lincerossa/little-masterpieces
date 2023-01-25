@@ -12,10 +12,14 @@ const Room: FC<RoomProps> = ({ position, dimension, image }) => {
 
   const frame = useMemo<MeshGeometryBaseProps>(() => {
     const FRAME_WIDTH = 0.1
-    const FRAMTE_THICKNESS = 0.05
+    const FRAME_THICKNESS = 0.05
     return {
-      position: [position[0], position[1], (dimension[2] + FRAMTE_THICKNESS) / 2],
-      dimension: [dimension[0] - FRAME_WIDTH, dimension[1] - 0.1, FRAMTE_THICKNESS],
+      position: [position[0], position[1], (dimension[2] + FRAME_THICKNESS) / 2],
+      dimension: [
+        dimension[0] - FRAME_WIDTH,
+        dimension[1] - FRAME_WIDTH,
+        FRAME_THICKNESS,
+      ],
     }
   }, [position, dimension])
 
