@@ -40,7 +40,12 @@ const Museum = () => {
           <pointLight position={[0, 50, -10]} color="#312e81" intensity={10} />
           <Floor position={[0, GROUND_FLOOR, 0]} />
           {images.map(({ image, position, dimension }) => (
-            <group key={image} onClick={() => setCameraPosition(position)}>
+            <group
+              key={image}
+              onClick={() => {
+                setCameraPosition(position)
+              }}
+            >
               <Room position={position} dimension={dimension} image={image} />
             </group>
           ))}
