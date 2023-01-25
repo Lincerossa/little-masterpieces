@@ -5,6 +5,7 @@ import { Suspense, useCallback, useState } from 'react'
 
 import Camera from '../components/Camera'
 import Floor from '../components/Floor'
+import Lights from '../components/Lights'
 import Room from '../components/Room'
 import { GROUND_FLOOR } from '../utils/consts'
 import useImages from '../utils/hooks/useImages'
@@ -33,7 +34,7 @@ const Museum = () => {
       >
         Manual camera {manualCamera ? 'on' : 'off'}
       </button>
-      <Canvas camera={{ fov: 75, position: [0, 10, 30] }}>
+      <Canvas camera={{ fov: 75, position: [0, 1, 8] }}>
         <Suspense fallback={null}>
           {cameraPosition && (
             <Camera
@@ -42,7 +43,7 @@ const Museum = () => {
             />
           )}
           {manualCamera && <OrbitControls />}
-          <ambientLight intensity={2} />
+          <Lights />
           <Stars
             radius={100}
             depth={40}
@@ -52,7 +53,6 @@ const Museum = () => {
             fade
             speed={1}
           />
-          <pointLight position={[0, 50, -10]} color="#312e81" intensity={10} />
           <Floor position={[0, GROUND_FLOOR, 0]} />
           {images.map(({ image, position, dimension }) => (
             <group
