@@ -8,17 +8,25 @@ type CameraProps = {
   cameraPosition: MeshGeometryBaseProps['position']
   setCameraPosition: (e: null) => void
 }
+
+const SPEED = 0.05
+const DISTANCE = 4
+const DEVIATION = 0.2
+
 const Camera: FC<CameraProps> = ({ setCameraPosition, cameraPosition }) => {
-  const [x, y, z] = cameraPosition
+  const [X, Y, Z] = cameraPosition
+
   useFrame(({ camera }) => {
-    camera.position.x = MathUtils.lerp(camera.position.x, x, 0.05)
-    camera.position.y = MathUtils.lerp(camera.position.y, y, 0.05)
-    camera.position.z = MathUtils.lerp(camera.position.z, z + 2, 0.05)
+    const { x, y, z } = camera.position
+
+    camera.position.x = MathUtils.lerp(x, X, SPEED)
+    camera.position.y = MathUtils.lerp(y, Y, SPEED)
+    camera.position.z = MathUtils.lerp(z, Z + DISTANCE, SPEED)
 
     if (
-      Math.abs(camera.position.x - x) < 0.2 &&
-      Math.abs(camera.position.y - y) < 0.2 &&
-      Math.abs(camera.position.z - z) < 2.2
+      Math.abs(x - X) < DEVIATION &&
+      Math.abs(y - Y) < DEVIATION &&
+      Math.abs(z - Z) < DEVIATION + DISTANCE
     ) {
       setCameraPosition(null)
     }
