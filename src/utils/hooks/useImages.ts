@@ -5,6 +5,8 @@ import { MeshGeometryBaseProps } from '../types'
 
 type UseImages = () => Array<MeshGeometryBaseProps & { image: string }>
 
+console.log('test fabio')
+
 const useImages: UseImages = () => {
   const images = useMemo<Array<MeshGeometryBaseProps & { image: string }>>(() => {
     return IMAGES.map((image, index) => ({
