@@ -1,9 +1,11 @@
 /* eslint-disable react/no-unknown-property */
 import { OrbitControls, Stars } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import { Suspense, useCallback, useState } from 'react'
+import { Leva } from 'leva'
+import { useCallback, useState } from 'react'
 
 import Camera from '../components/Camera'
+import { Effects } from '../components/Effects'
 import Floor from '../components/Floor'
 import Lights from '../components/Lights'
 import Room from '../components/Room'
@@ -28,43 +30,37 @@ const Museum = () => {
 
   return (
     <div className="w-screen h-screen bg-indigo-900">
-      <button
-        className="z-10 absolute top-1 right-1 rounded-md p-2 bg-orange-600 shadow-md hover:shadow-lg transition-shadow uppercase text-white"
-        onClick={() => setManualCamera((e) => !e)}
-      >
-        Manual camera {manualCamera ? 'on' : 'off'}
-      </button>
+      <Leva />
       <Canvas camera={{ fov: 75, position: [0, 1, 8] }}>
-        <Suspense fallback={null}>
-          {cameraPosition && (
-            <Camera
-              setCameraPosition={handleSetCameraPosition}
-              cameraPosition={cameraPosition}
-            />
-          )}
-          {manualCamera && <OrbitControls />}
-          <Lights />
-          <Stars
-            radius={100}
-            depth={40}
-            count={5000}
-            factor={10}
-            saturation={10}
-            fade
-            speed={1}
+        {cameraPosition && (
+          <Camera
+            setCameraPosition={handleSetCameraPosition}
+            cameraPosition={cameraPosition}
           />
-          <Floor position={[0, GROUND_FLOOR, 0]} />
-          {images.map(({ image, position, dimension }) => (
-            <group
-              key={image}
-              onClick={() => {
-                handleSetCameraPosition(position)
-              }}
-            >
-              <Room position={position} dimension={dimension} image={image} />
-            </group>
-          ))}
-        </Suspense>
+        )}
+        {manualCamera && <OrbitControls />}
+        <Lights />
+        <Stars
+          radius={100}
+          depth={40}
+          count={5000}
+          factor={10}
+          saturation={10}
+          fade
+          speed={1}
+        />
+        <Floor position={[0, GROUND_FLOOR, 0]} />
+        {images.map(({ image, position, dimension }) => (
+          <group
+            key={image}
+            onClick={() => {
+              handleSetCameraPosition(position)
+            }}
+          >
+            <Room position={position} dimension={dimension} image={image} />
+          </group>
+        ))}
+        <Effects />
       </Canvas>
     </div>
   )
