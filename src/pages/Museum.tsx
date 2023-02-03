@@ -1,14 +1,12 @@
 /* eslint-disable react/no-unknown-property */
 import { OrbitControls, Stars } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import { Leva } from 'leva'
-import { useControls } from 'leva'
 import { useCallback, useState } from 'react'
 
 import Camera from '../components/Camera'
 import Floor from '../components/Floor'
 import Lights from '../components/Lights'
-import Room from '../components/Room'
+import Painting from '../components/Painting'
 import { GROUND_FLOOR } from '../utils/consts'
 import useImages from '../utils/hooks/useImages'
 import { MeshGeometryBaseProps } from '../utils/types'
@@ -56,7 +54,7 @@ const Museum = () => {
               handleSetCameraPosition(position)
             }}
           >
-            <Room position={position} dimension={dimension} image={image} />
+            <Painting position={position} dimension={dimension} image={image} />
           </group>
         ))}
       </Canvas>

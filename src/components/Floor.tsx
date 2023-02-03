@@ -8,8 +8,6 @@ type FloorProps = {
 }
 
 const Floor: FC<FloorProps> = ({ position }) => {
-
-
   const [colorMap, displacementMap, normalMap, roughnessMap, aoMap] = useLoader(
     TextureLoader,
     [
