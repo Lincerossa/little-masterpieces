@@ -2,10 +2,10 @@
 import { OrbitControls, Stars } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Leva } from 'leva'
+import { useControls } from 'leva'
 import { useCallback, useState } from 'react'
 
 import Camera from '../components/Camera'
-import { Effects } from '../components/Effects'
 import Floor from '../components/Floor'
 import Lights from '../components/Lights'
 import Room from '../components/Room'
@@ -30,7 +30,6 @@ const Museum = () => {
 
   return (
     <div className="w-screen h-screen bg-indigo-900">
-      <Leva />
       <Canvas camera={{ fov: 75, position: [0, 1, 8] }}>
         {cameraPosition && (
           <Camera
@@ -60,7 +59,6 @@ const Museum = () => {
             <Room position={position} dimension={dimension} image={image} />
           </group>
         ))}
-        <Effects />
       </Canvas>
     </div>
   )
