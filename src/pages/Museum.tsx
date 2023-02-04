@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
-import { OrbitControls, Stars } from '@react-three/drei'
+import { Stars } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 
 import Camera from '../components/Camera'
 import Floor from '../components/Floor'
@@ -12,30 +12,13 @@ import useImages from '../utils/hooks/useImages'
 import { MeshGeometryBaseProps } from '../utils/types'
 
 const Museum = () => {
-  const [cameraPosition, setCameraPosition] = useState<
-    MeshGeometryBaseProps['position'] | null
-  >(null)
-  const [manualCamera, setManualCamera] = useState<boolean>(false)
+  const [position, setPosition] = useState<MeshGeometryBaseProps['position']>()
   const images = useImages()
-
-  const handleSetCameraPosition = useCallback(
-    (position: MeshGeometryBaseProps['position'] | null) => {
-      setManualCamera(false)
-      setCameraPosition(position)
-    },
-    [],
-  )
 
   return (
     <div className="w-screen h-screen bg-indigo-900">
       <Canvas camera={{ fov: 75, position: [0, 1, 8] }}>
-        {cameraPosition && (
-          <Camera
-            setCameraPosition={handleSetCameraPosition}
-            cameraPosition={cameraPosition}
-          />
-        )}
-        {manualCamera && <OrbitControls />}
+        {position && <Camera position={position} />}
         <Lights />
         <Stars
           radius={100}
@@ -51,7 +34,7 @@ const Museum = () => {
           <group
             key={image}
             onClick={() => {
-              handleSetCameraPosition(position)
+              setPosition(position)
             }}
           >
             <Painting position={position} dimension={dimension} image={image} />
