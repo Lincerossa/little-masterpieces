@@ -1,4 +1,4 @@
-export const GROUND_FLOOR = -1
+export const GROUND_FLOOR = -2
 export const CEILING_HEIGHT = 2
 
 export const IMAGES = [
