@@ -1,28 +1,33 @@
 /* eslint-disable react/no-unknown-property */
-import { MeshReflectorMaterial } from '@react-three/drei'
-import { Vector3 } from '@react-three/fiber'
+import { useLoader, Vector3 } from '@react-three/fiber'
 import { FC } from 'react'
+import { TextureLoader } from 'three/src/loaders/TextureLoader'
 
 type FloorProps = {
   position: Vector3
 }
 
 const Floor: FC<FloorProps> = ({ position }) => {
+  const [colorMap, displacementMap, normalMap, roughnessMap, aoMap] = useLoader(
+    TextureLoader,
+    [
+      'Marble016_1K_Color.jpg',
+      'Marble016_1K_Displacement.jpg',
+      'Marble016_1K_NormalDX.jpg',
+      'Marble016_1K_NormalGL.jpg',
+      'Marble016_1K_Roughness.jpg',
+    ],
+  )
+
   return (
     <mesh position={position} rotation={[-Math.PI / 2, 0, 0]}>
       <planeGeometry args={[500, 500]} />
-      <MeshReflectorMaterial
-        blur={[300, 100]}
-        resolution={2048}
-        mixBlur={1}
-        mixStrength={50}
-        roughness={1}
-        depthScale={1.2}
-        minDepthThreshold={0.4}
-        maxDepthThreshold={1.4}
-        color="#050505"
-        metalness={0.5}
-        mirror={1}
+      <meshStandardMaterial
+        map={colorMap}
+        displacementMap={displacementMap}
+        normalMap={normalMap}
+        roughnessMap={roughnessMap}
+        aoMap={aoMap}
       />
     </mesh>
   )

@@ -5,9 +5,9 @@ import * as THREE from 'three'
 
 import { MeshGeometryBaseProps } from '../utils/types'
 
-type RoomProps = MeshGeometryBaseProps & { image: string }
+type PaintingProps = MeshGeometryBaseProps & { image: string }
 
-const Room: FC<RoomProps> = ({ position, dimension, image }) => {
+const Painting: FC<PaintingProps> = ({ position, dimension, image }) => {
   const texture = useLoader(THREE.TextureLoader, image)
 
   const frame = useMemo<MeshGeometryBaseProps>(() => {
@@ -27,7 +27,7 @@ const Room: FC<RoomProps> = ({ position, dimension, image }) => {
     <group>
       <mesh position={position}>
         <boxGeometry args={dimension} />
-        <meshPhysicalMaterial attach="material" color="#ea580c" />
+        <meshPhysicalMaterial attach="material" color="#a10de5" />
       </mesh>
       <mesh position={frame.position}>
         <boxGeometry args={frame.dimension} />
@@ -37,4 +37,4 @@ const Room: FC<RoomProps> = ({ position, dimension, image }) => {
   )
 }
 
-export default Room
+export default Painting
