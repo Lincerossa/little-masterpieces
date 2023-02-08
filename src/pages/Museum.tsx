@@ -12,13 +12,13 @@ import useImages from '../utils/hooks/useImages'
 import { MeshGeometryBaseProps } from '../utils/types'
 
 const Museum = () => {
-  const [position, setPosition] = useState<MeshGeometryBaseProps['position']>()
+  const [position, setPosition] = useState<MeshGeometryBaseProps['position']>([0,0,0])
   const images = useImages()
 
   return (
     <div className="w-screen h-screen bg-indigo-900">
       <Canvas camera={{ fov: 75, position: [0, 1, 8] }}>
-        {position && <Camera position={position} />}
+        <Camera position={position} />
         <Lights />
         <Stars
           radius={100}

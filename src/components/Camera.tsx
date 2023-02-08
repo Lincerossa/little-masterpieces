@@ -1,7 +1,7 @@
 import { OrbitControls } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { useControls } from 'leva'
-import { FC,  useState } from 'react'
+import { FC } from 'react'
 import { MathUtils } from 'three'
 
 import { MeshGeometryBaseProps } from '../utils/types'
@@ -15,15 +15,14 @@ const DISTANCE = 4
 const DEVIATION = 0.2
 
 const Camera: FC<CameraProps> = ({ position }) => {
-  const [orbit, showOrbit] = useState(false)
-  const { flyByEnabled } = useControls({
-    flyByEnabled: true,
+  const { fly } = useControls({
+    fly: false,
   })
   const [X, Y, Z] = position
 
   useFrame(({ camera }) => {
     const { x, y, z } = camera.position
-    if (!flyByEnabled) return
+    if (!fly) return
     camera.position.x = MathUtils.lerp(x, X, SPEED)
     camera.position.y = MathUtils.lerp(y, Y, SPEED)
     camera.position.z = MathUtils.lerp(z, Z + DISTANCE, SPEED)
@@ -34,10 +33,10 @@ const Camera: FC<CameraProps> = ({ position }) => {
       Math.abs(y - Y) < DEVIATION &&
       Math.abs(z - Z) < DEVIATION + DISTANCE
     ) {
-      showOrbit(true)
+      // TODO: end of the fly
     }
   })
-  return orbit ? <OrbitControls /> : null
+  return <OrbitControls />
 }
 
 export default Camera
