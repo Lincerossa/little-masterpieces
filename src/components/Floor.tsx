@@ -21,7 +21,7 @@ const Floor: FC<FloorProps> = ({ position }) => {
 
   return (
     <mesh position={position} rotation={[-Math.PI / 2, 0, 0]}>
-      <planeGeometry args={[500, 500]} />
+      <planeGeometry args={[100, 100]} />
       <meshStandardMaterial
         map={colorMap}
         displacementMap={displacementMap}
