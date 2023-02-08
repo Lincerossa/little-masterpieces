@@ -17,7 +17,7 @@ const Lights = () => {
         y: random(-10, 30),
         z: random(-50, -50),
       })),
-    [],
+    [lightsQuantity],
   )
   return (
     <>
