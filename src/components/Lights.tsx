@@ -7,7 +7,7 @@ const Lights = () => {
   const { lightsColor, mainLightColor, lightsQuantity } = useControls({
     lightsColor: '#a10de5',
     mainLightColor: '#000000',
-    lightsQuantity: { value: 10, min: 5, max: 20 },
+    lightsQuantity: { value: 20, min: 5, max: 20 },
   })
 
   const lights = useMemo(

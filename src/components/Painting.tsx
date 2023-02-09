@@ -27,7 +27,7 @@ const Painting: FC<PaintingProps> = ({ position, dimension, image }) => {
     <group>
       <mesh position={position}>
         <boxGeometry args={dimension} />
-        <meshPhysicalMaterial attach="material" color="#a10de5" />
+        <meshPhysicalMaterial attach="material" color="#7d00b7" />
       </mesh>
       <mesh position={frame.position}>
         <boxGeometry args={frame.dimension} />

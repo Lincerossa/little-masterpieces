@@ -1,6 +1,3 @@
-export const GROUND_FLOOR = -2
-export const CEILING_HEIGHT = 2
-
 export const IMAGES = [
   'https://res.cloudinary.com/dmgymopan/image/upload/v1674814395/little-masterpieces/WhatsApp_Image_2023-01-27_at_11.10.32_crnpvv.jpg',
   'https://images.unsplash.com/photo-1533158388470-9a56699990c6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80',
